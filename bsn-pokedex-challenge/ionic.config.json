@@ -1,0 +1,7 @@
+{
+  "name": "bsn-pokedex-challenge",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
