@@ -1,81 +1,147 @@
-<div class="pokedex-frame" (click)="togglePokedex()" [class.is-open]="isOpen">
+<ion-content class="pokedex" scrollEvents="true" (ionScroll)="onScroll($event)">
+  <div class="pokedex__frame" (click)="togglePokedex()" [class.pokedex__frame--open]="isOpen">
+    <ng-container *ngFor="let position of ['top-left', 'top-right', 'bottom-left', 'bottom-right']">
+      <div class="pokedex__corner pokedex__corner--{{ position }}">
+        <svg viewBox="0 0 100 100" class="pokedex__corner-svg">
+          <circle cx="0" cy="0" r="60" stroke="#a10e0e" stroke-width="5" fill="none" />
+          <circle cx="0" cy="0" r="35" stroke="#a10e0e" stroke-width="5" fill="none" />
+        </svg>
+      </div>
+    </ng-container>
 
-  <div class="corner corner-top-left">
-    <svg viewBox="0 0 100 100" class="corner-svg">
-      <circle cx="0" cy="0" r="60" stroke="#a10e0e" stroke-width="5" fill="none" />
-      <circle cx="0" cy="0" r="35" stroke="#a10e0e" stroke-width="5" fill="none" />
-    </svg>
-  </div>
-  <div class="corner corner-top-right">
-    <svg viewBox="0 0 100 100" class="corner-svg">
-      <circle cx="0" cy="0" r="60" stroke="#a10e0e" stroke-width="5" fill="none" />
-      <circle cx="0" cy="0" r="35" stroke="#a10e0e" stroke-width="5" fill="none" />
-    </svg>
-  </div>
-  <div class="corner corner-bottom-left">
-    <svg viewBox="0 0 100 100" class="corner-svg">
-      <circle cx="0" cy="0" r="60" stroke="#a10e0e" stroke-width="5" fill="none" />
-      <circle cx="0" cy="0" r="35" stroke="#a10e0e" stroke-width="5" fill="none" />
-    </svg>
-  </div>
-  <div class="corner corner-bottom-right">
-    <svg viewBox="0 0 100 100" class="corner-svg">
-      <circle cx="0" cy="0" r="60" stroke="#a10e0e" stroke-width="5" fill="none" />
-      <circle cx="0" cy="0" r="35" stroke="#a10e0e" stroke-width="5" fill="none" />
-    </svg>
-  </div>
-  <div class="pokeball-button"></div>
-  <div class="pokedex-section top">
-    <div class="bezel"></div>
-  </div>
+    <div class="pokedex__pokeball-button"></div>
 
-  <div class="screen">
-    <div class="screen-content">
-      
-      <div class="pokemon-list-panel">
+    <div class="pokedex__section pokedex__section--top">
+      <div class="pokedex__bezel"></div>
+    </div>
 
-        <div class="list-controls">
-          <ion-searchbar placeholder="Buscar por nome ou nº" (ionInput)="onSearchChange($event)"></ion-searchbar>
-          <ion-item>
-            <ion-label>Ordenar por:</ion-label>
-            <ion-select value="id" interface="popover" (ionChange)="onSortChange($event)">
-              <ion-select-option value="id">Número</ion-select-option>
-              <ion-select-option value="name">Nome</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </div>
+    <div class="pokedex__screen">
+      <div class="pokedex__screen-content">
+        <div class="pokedex__panels-container">
+          <div class="pokedex__panel-list">
+            <div class="pokedex__list-controls">
+              <ion-searchbar placeholder="Buscar por nome ou nº" (ionInput)="onSearchChange($event)"></ion-searchbar>
+              <ion-item>
+                <ion-label>Ordenar por:</ion-label>
+                <ion-select [value]="sortKey" interface="popover" (ionChange)="onSortChange($event)">
+                  <ion-select-option value="id">Número</ion-select-option>
+                  <ion-select-option value="name">Nome</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
 
-        <div class="list-content-wrapper">
-          <div *ngIf="!isLoading" class="pokemon-list-grid">
-            <div class="pokemon-card" *ngFor="let pokemon of displayedPokemons" (click)="selectPokemon(pokemon, $event)">
-              <div class="card-image-container">
-                <img [src]="pokemon.imageUrl" alt="Sprite of {{pokemon.name}}" loading="lazy">
+            <div class="pokedex__list-content-wrapper" (scroll)="onScroll($event)">
+              <div class="pokedex__list-grid">
+                <div class="pokedex__pokemon-card"
+                  *ngFor="let pokemon of getPokemonsToDisplay(); trackBy: trackByPokemon"
+                  (click)="selectPokemon(pokemon, $event)">
+                  <div class="pokedex__card-image-container">
+                    <img [src]="pokemon.imageUrl" alt="Sprite of {{pokemon.name}}" loading="lazy">
+                  </div>
+                  <div class="pokedex__card-info">
+                    <span class="pokedex__pokemon-id">#{{ pokemon.id.padStart(3, '0') }}</span>
+                    <p class="pokedex__pokemon-name">{{ pokemon.name }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="card-info">
-                <span class="pokemon-id">#{{ pokemon.id.padStart(3, '0') }}</span>
-                <p class="pokemon-name">{{ pokemon.name }}</p>
+
+              <div *ngIf="isLoading" class="pokedex__list-grid">
+                <div class="pokedex__pokemon-card-skeleton" *ngFor="let i of [1,2,3,4,5,6,7,8]"></div>
+              </div>
+
+              <div *ngIf="isLoading" class="pokedex__loading-indicator">
+                <ion-spinner name="bubbles"></ion-spinner>
+                <p>Carregando...</p>
               </div>
             </div>
           </div>
 
-          <div *ngIf="isLoading" class="pokemon-list-grid">
-            <div class="pokemon-card-skeleton" *ngFor="let i of [1,2,3,4,5,6,7,8]"></div>
+          <div class="pokedex__panel-detail">
+            <div *ngIf="isDetailLoading" class="pokedex__detail-skeleton">
+              <ion-spinner name="bubbles" color="primary"></ion-spinner>
+              <p>Carregando dados...</p>
+            </div>
+
+            <div *ngIf="!selectedPokemonDetails && !isDetailLoading" class="pokedex__initial-message">
+              <h2>Selecione um Pokémon</h2>
+            </div>
+
+            <div *ngIf="selectedPokemonDetails" class="pokedex__details-wrapper">
+              <ion-button class="pokedex__favorite-button" fill="clear" (click)="toggleFavorite($event)">
+                <ion-icon slot="icon-only"
+                          [name]="isCurrentFavorite ? 'heart' : 'heart-outline'"
+                          [color]="isCurrentFavorite ? 'danger' : 'medium'">
+                </ion-icon>
+              </ion-button>
+
+              <div class="pokedex__detail-column-left">
+                <div class="pokedex__pokemon-card pokedex__pokemon-card--large" [class]="'type-' + selectedPokemonDetails.types[0].type.name">
+                  <img
+                    *ngIf="selectedPokemonDetails"
+                    [src]="selectedPokemonDetails.sprites.other['official-artwork'].front_default"
+                    [alt]="selectedPokemonDetails.name"
+                    class="pokedex__pokemon-detail-image"
+                  />
+                  <div class="pokedex__card-info">
+                    <span class="pokedex__pokemon-id">#{{ selectedPokemonDetails.id.toString().padStart(3, '0') }}</span>
+                    <p class="pokedex__pokemon-name">{{ selectedPokemonDetails.name }}</p>
+                  </div>
+                </div>
+                <p class="pokedex__pokemon-description">{{ selectedPokemonDetails.description }}</p>
+              </div>
+
+              <div class="pokedex__detail-column-right">
+                <div class="pokedex__detail-section">
+                  <h3>Tipos</h3>
+                  <div class="pokedex__types-container">
+                    <span *ngFor="let typeInfo of selectedPokemonDetails.types"
+                          class="pokedex__type-badge type-{{typeInfo.type.name}}">
+                      {{ typeInfo.type.name }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="pokedex__detail-section">
+                  <h3 class="pokedex__abilities-title">Habilidades</h3>
+                  <ul class="pokedex__abilities-list">
+                    <li *ngFor="let abilityInfo of selectedPokemonDetails.abilities">
+                      {{ abilityInfo.ability.name }}
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="pokedex__detail-section">
+                  <h3>Stats Base</h3>
+                  <div class="pokedex__stats-container">
+                    <div *ngFor="let stat of selectedPokemonDetails.stats" class="pokedex__stat-item">
+                      <span class="pokedex__stat-name">{{ stat.stat.name }}</span>
+                      <span class="pokedex__stat-value">{{ stat.base_stat }}</span>
+                      <div class="pokedex__stat-bar">
+                        <div class="pokedex__stat-bar-fill" [style.width.%]="(stat.base_stat / 255) * 100"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="pokedex__detail-section pokedex__detail-section--bottom-stats">
+                  <div>
+                    <strong>Altura:</strong> {{ selectedPokemonDetails.height / 10 }} m
+                  </div>
+                  <div>
+                    <strong>Peso:</strong> {{ selectedPokemonDetails.weight / 10 }} kg
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
-            <ion-infinite-scroll-content loading-spinner="bubbles" loading-text="Carregando...">
-            </ion-infinite-scroll-content>
-          </ion-infinite-scroll>
         </div>
       </div>
-
-        <div class="pokemon-detail-panel">
-          <h2>Selecione um Pokémon</h2>
-        </div>
     </div>
-  </div>
-  <div class="pokedex-section bottom">
-    <div class="bezel"></div>
-  </div>
 
-</div>
+    <div class="pokedex__section pokedex__section--bottom">
+      <div class="pokedex__bezel"></div>
+    </div>
+
+  </div>
+</ion-content>

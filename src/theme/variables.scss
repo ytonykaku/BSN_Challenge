@@ -1,2 +1,20 @@
 // For information on how to create your own theme, please see:
 // http://ionicframework.com/docs/theming/
+
+  :root {
+    --ion-color-pokedex-red: #e62121;
+    --ion-color-pokedex-red-shade: #c91d1d;
+    --ion-color-pokedex-red-tint: #e73737;
+  
+    --ion-color-pokedex-red-dark: #a10e0e;
+    --ion-color-pokedex-red-dark-shade: #8e0c0c;
+    --ion-color-pokedex-red-dark-tint: #aa2626;
+  
+    --ion-color-pokedex-black: #282828;
+    --ion-color-pokedex-black-shade: #232323;
+    --ion-color-pokedex-black-tint: #3e3e3e;
+  
+    --ion-color-pokedex-blue: #a4f1f1;
+    --ion-color-pokedex-blue-shade: #90d4d4;
+    --ion-color-pokedex-blue-tint: #adf2f2;
+  }
