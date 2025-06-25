@@ -25,3 +25,10 @@ ion-content {
   --padding-bottom: var(--tab-bar-height, 55px);
   transition: --padding-bottom 0.4s ease-in-out;
 }
+
+.tab-icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  margin: 0 auto 4px;
+}
