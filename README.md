@@ -1,10 +1,10 @@
-````markdown
-# 🐾 BSN_Challenge — Pokedex em Ionic + Angular
+
+BSN_Challenge — Pokedex em Ionic + Angular
 
 Este repositório contém o desafio técnico da BSN. O objetivo foi criar uma Pokedex, utilizando a PokeAPI, onde o usuário pudesse favoritar seus Pokémons preferidos e exibi-los em outra aba.
 A aplicação deve ter caráter reativo, funcionando para dispositivos de tamanhos diferentes, incluindo smartphones.
 
-## 📂 Arquitetura do Projeto
+## Arquitetura do Projeto
 
 ```
 src/
@@ -25,7 +25,7 @@ src/
   * Rotas lazy loaded para melhorar o desempenho
   * Uso de breakpoint para definir o tipo de dispositivo
 
-## 🧠 Padrões de Desenvolvimento
+## Padrões de Desenvolvimento
 
   * TypeScript com tipagem forte
   * Angular DI para injeção de dependências
@@ -33,7 +33,7 @@ src/
   * SCSS com convenção BEM para manter o estilo organizado
   * Arquitetura limpa e separação clara de responsabilidades com auxílio de LINT.
 
-## 🛠 Recursos e Bibliotecas
+## Recursos e Bibliotecas
 
 | Recurso       | Uso                                        |
 | :------------ | :----------------------------------------- |
@@ -45,7 +45,7 @@ src/
 | Ionicon       | Ícones vetoriais (ex.: heart)              |
 | Angular Router | Navegação entre páginas                    |
 
-## 🚀 Instalação e Execução
+## Instalação e Execução
 
 ### Pré-requisitos
 
@@ -89,10 +89,7 @@ Insira aqui capturas de tela mostrando:
 
 Exemplo:
 
-```scss
-![Tela Principal](caminho/para/imagem.png)
-![Tela de Detalhes](caminho/para/imagem.png)
-```
+
 
 ```
 ```
