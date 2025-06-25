@@ -1,42 +1,98 @@
-# BSN_Challenge
-Desafio técnico do processo seletivo da BSN
+````markdown
+# 🐾 BSN_Challenge — Pokedex em Ionic + Angular
 
-## TODO:
+Este repositório contém o desafio técnico da BSN. O objetivo foi criar uma Pokedex, utilizando a PokeAPI, onde o usuário pudesse favoritar seus Pokémons preferidos e exibi-los em outra aba.
+A aplicação deve ter caráter reativo, funcionando para dispositivos de tamanhos diferentes, incluindo smartphones.
 
-Para avaliar suas habilidades técnicas e estilo de codificação, convidamos você a desenvolver um pequeno aplicativo utilizando os serviços RESTful da API pública PokeAPI.
+## 📂 Arquitetura do Projeto
 
-Como participar?
-Assim que iniciar esta avaliação, crie um repositório no GitHub com a base do projeto utilizando Ionic com Angular, para que possamos acompanhar seu progresso por meio dos commits.
+```
+src/
+└─ app/
+   ├─ components/
+   │  └─ pokemon-detail-modal/   # Modal para detalhes do Pokémon (Exclusivo para smartphones)
+   ├─ models/                    # Interfaces e modelos
+   ├─ services/                  # Serviços
+   ├─ tab1/, tab2/               # Páginas principais (uma por aba), lazy loaded
+   ├─ tabs/                      # Gerenciamento da navegação entre abas
+   └─ app.module.ts              # Módulo raiz do app
+````
 
-Escopo do projeto:
-Tela principal: Deve exibir o nome e a imagem do Pokémon. O layout fica a seu critério, desde que seja funcional e organizado.
+**Principais pontos:**
 
-Navegação: Implemente redirecionamento para uma tela de detalhes, conforme descrito no item 3.
+  * Páginas e componentes reativos
+  * Serviços injetáveis que centralizam a lógica (ex.: chamadas HTTP, favoritos, estado de UI)
+  * Rotas lazy loaded para melhorar o desempenho
+  * Uso de breakpoint para definir o tipo de dispositivo
 
-Tela de detalhes: Apresente uma lista com no mínimo 6 descrições adicionais e imagens relacionadas ao Pokémon selecionado. O layout pode ser escolhido por você.
+## 🧠 Padrões de Desenvolvimento
 
-Boas práticas: Compartilhe o projeto no GitHub seguindo boas práticas de desenvolvimento, incluindo commits claros e frequentes.
+  * TypeScript com tipagem forte
+  * Angular DI para injeção de dependências
+  * Observables RxJS para chamadas HTTP e reatividade
+  * SCSS com convenção BEM para manter o estilo organizado
+  * Arquitetura limpa e separação clara de responsabilidades com auxílio de LINT.
 
-README.md: Inclua um arquivo README com um texto de até 10 frases explicando sua abordagem, estilo de codificação e padrões de design adotados para este projeto.
+## 🛠 Recursos e Bibliotecas
 
-Dependências: Você pode utilizar bibliotecas de terceiros conforme preferir para facilitar o desenvolvimento.
+| Recurso       | Uso                                        |
+| :------------ | :----------------------------------------- |
+| Angular       | Framework principal                        |
+| Ionic Framework | UI nativo e CLI para execução              |
+| Capacitor     | Builds Android/iOS                         |
+| RxJS          | Fluxos reativos e Observables              |
+| HttpClient    | Comunicação com PokeAPI                    |
+| Ionicon       | Ícones vetoriais (ex.: heart)              |
+| Angular Router | Navegação entre páginas                    |
 
-Paginação: Implemente paginação para a lista de Pokémons ou descrições, garantindo melhor usabilidade.
+## 🚀 Instalação e Execução
 
-Injeção de dependência: Utilize esse padrão para gerenciar serviços e dependências no seu código.
+### Pré-requisitos
 
-Favoritos: Permita que o usuário marque Pokémons como favoritos em uma lista específica.
+  * Node.js (LTS) e npm
+  * Ionic CLI global:
 
-Responsividade: Adapte a interface para funcionar adequadamente em diferentes orientações de dispositivos móveis (modo retrato e paisagem).
+<!-- end list -->
 
-Diferenciais (não obrigatórios, mas que farão seu projeto se destacar):
-- Documentação técnica detalhada.
+```bash
+npm install -g @ionic/cli
+```
 
-- Implementação de WebHooks.
+### Como rodar localmente
 
-- Inclusão de mídia no repositório (imagens, vídeos ou GIFs) para demonstrar funcionalidades.
 
-- Testes unitários cobrindo partes importantes do código.
+    ```bash
+    git clone [https://github.com/ytonykaku/BSN_Challenge.git](https://github.com/ytonykaku/BSN_Challenge.git)
+    cd BSN_Challenge
+    npm install
+    ionic serve
+    ```
 
-Fique à vontade para adicionar outras funcionalidades ou melhorias que considerar interessantes — surpreenda-nos!
+### Build para mobile
 
+1.  Adicionar a plataforma:
+
+    ```bash
+    ionic capacitor add android
+    ionic capacitor add ios
+    npm run build
+    ionic capacitor copy android
+    ionic capacitor run android
+    ```
+
+## 📸 Pokedex em ação
+
+Insira aqui capturas de tela mostrando:
+
+  * Tela Principal (listagem de Pokémons com imagem e nome)
+  * Tela de Detalhes (modal mostrando informações e botão de favorito)
+
+Exemplo:
+
+```scss
+![Tela Principal](caminho/para/imagem.png)
+![Tela de Detalhes](caminho/para/imagem.png)
+```
+
+```
+```
