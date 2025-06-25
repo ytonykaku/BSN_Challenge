@@ -83,7 +83,3 @@ npm install -g @ionic/cli
 ## Demonstração
 
 ![Demonstração](https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExNmI4ODc3aXFoNHhoZGZna3E3bWprejBnYzU3MjB6MzM3MGhwbTZpcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/mfxWB9QMg7dYXA9Ir0/giphy.gif)
-
-
-```
-```
