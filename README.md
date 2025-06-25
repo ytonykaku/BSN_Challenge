@@ -54,25 +54,22 @@ src/
 
 <!-- end list -->
 
-```bash
+```
 npm install -g @ionic/cli
 ```
 
 ### Como rodar localmente
 
-
-    ```bash
-    git clone [https://github.com/ytonykaku/BSN_Challenge.git](https://github.com/ytonykaku/BSN_Challenge.git)
+    git clone https://github.com/ytonykaku/BSN_Challenge.git
     cd BSN_Challenge
     npm install
     ionic serve
-    ```
 
 ### Build para mobile
 
 1.  Adicionar a plataforma:
 
-    ```bash
+    ```
     ionic capacitor add android
     ionic capacitor add ios
     npm run build
