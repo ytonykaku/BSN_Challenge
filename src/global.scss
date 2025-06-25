@@ -146,6 +146,7 @@ body .pokedex__panel-detail {
 
     .pokedex__stats-container {
       width: 100%;
+      background-color: #00000025;
 
       .pokedex__stat-item {
         display: grid;
@@ -154,26 +155,31 @@ body .pokedex__panel-detail {
         gap: 5px;
         margin-bottom: 5px;
         font-size: 0.8em;
+        background: #00000025;
 
         .pokedex__stat-name {
           text-transform: capitalize;
           font-weight: 500;
           text-align: right;
+          background: #00000025;
         }
 
         .pokedex__stat-value {
           font-weight: 700;
+          background: #00000025;
         }
 
         .pokedex__stat-bar {
           background: #ddd;
           border-radius: 4px;
           height: 8px;
+          background: #00000025;
 
           .pokedex__stat-bar-fill {
             background: #3267ca;
             height: 100%;
             border-radius: 4px;
+            background: #00000025;
           }
         }
       }
@@ -193,7 +199,7 @@ body .pokedex__panel-detail {
     position: absolute;
     top: 5px;
     right: 5px;
-    z-index: 1000000;
+    z-index: 1000;
 
     ion-icon {
       font-size: 2em;

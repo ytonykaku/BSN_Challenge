@@ -18,7 +18,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class Tab1Page extends PokemonBasePage {
   @ViewChild(IonContent) content!: IonContent;
-  public override isLoading = false; // Começando com false
+  public override isLoading = false;
 
   private generationRanges = [
     { start: 1, end: 72 },
@@ -64,31 +64,25 @@ export class Tab1Page extends PokemonBasePage {
 
     const target = event.target as HTMLElement;
     if ((target.scrollTop + target.clientHeight) / target.scrollHeight >= 0.7) {
-      // Aumentei para 70% para ficar mais confortável
       this.loadNextGeneration();
     }
   }
 
-  // NOVA VERSÃO DO checkScroll - MAIS SEGURA
   private checkScroll() {
-    // A guarda de segurança previne execuções múltiplas
     if (this.isLoading) {
-      setTimeout(() => this.checkScroll(), 200); // Se estiver carregando, tenta de novo em 200ms
+      setTimeout(() => this.checkScroll(), 200);
       return;
     }
 
     this.content.getScrollElement().then((element) => {
       const hasScrollbar = element.scrollHeight > element.clientHeight;
 
-      // Se não tem barra de rolagem E ainda há o que carregar...
       if (!hasScrollbar && this.currentGenIndex < this.generationRanges.length) {
         console.log('Tela não preenchida, carregando próxima geração automaticamente...');
         this.loadNextGeneration();
       }
     });
   }
-
-  // NOVA VERSÃO DO loadNextGeneration - CORRIGIDA
   loadNextGeneration(): void {
     if (this.isLoading || this.currentGenIndex >= this.generationRanges.length) {
       return;

@@ -113,6 +113,7 @@ export abstract class PokemonBasePage implements OnInit, OnDestroy {
 
   protected updateDisplayedPokemons(): void {
     this.displayedPokemons = [...this.allPokemons];
+    this.applySort();
   }
 
   public getPokemonsToDisplay(): Pokemon[] {
@@ -129,8 +130,30 @@ export abstract class PokemonBasePage implements OnInit, OnDestroy {
     this.uiStateService.setPokedexOpen(this.isOpen);}
     return;
   }
-  public onSearchChange(event: any): void { }
-  public onSortChange(event: any): void { }
+
+  public onSearchChange(event: any): void {
+    const searchTerm = event?.detail?.value?.toLowerCase() || '';
+    this.displayedPokemons = this.allPokemons.filter(p =>
+      p.name.toLowerCase().includes(searchTerm) || p.id.includes(searchTerm)
+    );
+      this.applySort();
+  }
+
+  public onSortChange(event: any): void {
+    this.sortKey = event?.detail?.value || 'id';
+    this.applySort();
+  }
+
+  private applySort(): void {
+  this.displayedPokemons.sort((a, b) => {
+    if (this.sortKey === 'id') {
+      return parseInt(a.id, 10) - parseInt(b.id, 10);
+    } else if (this.sortKey === 'name') {
+      return a.name.localeCompare(b.name);
+    }
+    return 0;
+  });
+}
 
   protected mapDetailsToPokemon(details: PokemonDetails): Pokemon {
     return {
