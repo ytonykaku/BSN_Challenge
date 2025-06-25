@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class FavoritesService {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(Array.from(favorites.values())));
     this.favorites$.next(favorites);
   }
-
-  getFavorites() {
+  
+  getFavorites(): Observable<Set<string>> {
     return this.favorites$.asObservable();
   }
 

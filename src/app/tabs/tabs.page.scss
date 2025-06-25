@@ -1,19 +1,13 @@
 :host {
-  --tab-bar-height: 55px; 
-  
-  // Quando a pokédex NÃO estiver aberta, a altura da barra será 0
-  &:not(.pokedex-is-open) {
+  --tab-bar-height: 0px;
+
+  &.pokedex-is-open {
     --tab-bar-height: 0px;
-  }
-
-  ion-router-outlet + ion-tab-bar {
-
   }
 }
 
-// Estilos da barra de abas
 ion-tab-bar {
-  height: var(--tab-bar-height);
+  height: 55px;
   transition: height 0.4s ease-in-out;
   overflow: hidden;
 
@@ -21,9 +15,12 @@ ion-tab-bar {
   --color: #a10e0e;
   --color-selected: #e62121;
   border-top: 2px solid #3e3e3e;
+
+  &.tabs-hidden {
+    height: 0px;
+  }
 }
 
-// Regra para o conteúdo da página
 ion-content {
   --padding-bottom: var(--tab-bar-height, 55px);
   transition: --padding-bottom 0.4s ease-in-out;

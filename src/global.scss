@@ -10,20 +10,20 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
-@import "@ionic/angular/css/core.css";
+@import '@ionic/angular/css/core.css';
 
 /* Basic CSS for apps built with Ionic */
-@import "@ionic/angular/css/normalize.css";
-@import "@ionic/angular/css/structure.css";
-@import "@ionic/angular/css/typography.css";
-@import "@ionic/angular/css/display.css";
+@import '@ionic/angular/css/normalize.css';
+@import '@ionic/angular/css/structure.css';
+@import '@ionic/angular/css/typography.css';
+@import '@ionic/angular/css/display.css';
 
 /* Optional CSS utils that can be commented out */
-@import "@ionic/angular/css/padding.css";
-@import "@ionic/angular/css/float-elements.css";
-@import "@ionic/angular/css/text-alignment.css";
-@import "@ionic/angular/css/text-transformation.css";
-@import "@ionic/angular/css/flex-utils.css";
+@import '@ionic/angular/css/padding.css';
+@import '@ionic/angular/css/float-elements.css';
+@import '@ionic/angular/css/text-alignment.css';
+@import '@ionic/angular/css/text-transformation.css';
+@import '@ionic/angular/css/flex-utils.css';
 
 /**
  * Ionic Dark Mode
@@ -35,3 +35,215 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+@import './theme/pokemon-types';
+
+@each $type, $color in $type-colors {
+  .type-#{$type} {
+    background-color: $color;
+  }
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+body .pokedex__panel-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+
+  .pokedex__initial-message h2 {
+    color: #555;
+    font-weight: 300;
+  }
+
+  .pokedex__details-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: stretch;
+  }
+
+  .pokedex__detail-column-left {
+    flex: 1 1 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .pokedex__pokemon-description {
+      font-size: 0.9em;
+      text-align: left;
+      color: #444;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 10px;
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+
+  .pokedex__detail-column-right {
+    flex: 1 1 60%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
+
+    .pokedex__detail-section {
+      margin-bottom: 15px;
+
+      h3 {
+        font-size: 0.9em;
+        font-weight: 700;
+        color: #004d40;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-align: left;
+      }
+    }
+
+    .pokedex__types-container {
+      justify-content: flex-start;
+
+      .pokedex__type-badge {
+        padding: 4px 12px;
+        border-radius: 12px;
+        color: white;
+        text-transform: capitalize;
+        font-weight: 500;
+        font-size: 0.9em;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    .pokedex__abilities-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        text-transform: capitalize;
+        background: #eee;
+        padding: 6px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        font-size: 0.9em;
+        text-align: left;
+      }
+    }
+
+    .pokedex__stats-container {
+      width: 100%;
+
+      .pokedex__stat-item {
+        display: grid;
+        grid-template-columns: 80px 30px 1fr;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 5px;
+        font-size: 0.8em;
+
+        .pokedex__stat-name {
+          text-transform: capitalize;
+          font-weight: 500;
+          text-align: right;
+        }
+
+        .pokedex__stat-value {
+          font-weight: 700;
+        }
+
+        .pokedex__stat-bar {
+          background: #ddd;
+          border-radius: 4px;
+          height: 8px;
+
+          .pokedex__stat-bar-fill {
+            background: #3267ca;
+            height: 100%;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
+
+    .pokedex__detail-section--bottom-stats {
+      display: flex;
+      justify-content: space-around;
+      font-size: 0.9em;
+      width: 100%;
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+  }
+
+  .pokedex__favorite-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 100;
+
+    ion-icon {
+      font-size: 2em;
+    }
+  }
+
+  .pokedex__detail-skeleton {
+    width: 100%;
+
+    .skeleton-card, .skeleton-line {
+      background: linear-gradient(90deg, #e0e0e0 25%, #f5f5f5 50%, #e0e0e0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite linear;
+    }
+
+    .skeleton-card {
+      height: 180px;
+      width: 150px;
+      border-radius: 12px;
+      margin: 0 auto 20px auto;
+    }
+
+    .skeleton-line {
+      height: 30px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+
+      &.short {
+        width: 60%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+body .pokedex__pokemon-card--large {
+  width: 100%;
+  max-width: 320px;
+  transform: scale(1);
+  margin-bottom: 20px;
+  padding: 20px;
+
+  .pokedex__card-image-container {
+    width: 180px;
+    height: 180px;
+  }
+  
+  .pokedex__pokemon-name {
+    font-size: 1.5em;
+    margin-top: 5px;
+  }
+}

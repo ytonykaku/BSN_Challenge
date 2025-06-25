@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>#{{ details.id.toString().padStart(3, '0') }} - {{ details.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFavorite()">
+        <ion-icon 
+          slot="icon-only" 
+          [name]="isFavorite ? 'heart' : 'heart-outline'"
+          [color]="isFavorite ? 'danger' : 'light'">
+        </ion-icon>
+      </ion-button>
+      <ion-button (click)="dismiss()">Fechar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <div *ngIf="details" class="pokedex__details-wrapper">
+
+    <div class="pokedex__detail-column-left">
+      <div class="pokedex__pokemon-card pokedex__pokemon-card--large" [class]="'type-' + details.types[0].type.name">
+        <img
+          [src]="details.sprites.other['official-artwork'].front_default"
+          [alt]="details.name"
+          class="pokedex__pokemon-detail-image"
+        />
+        <div class="pokedex__card-info">
+          <span class="pokedex__pokemon-id">#{{ details.id.toString().padStart(3, '0') }}</span>
+          <p class="pokedex__pokemon-name">{{ details.name }}</p>
+        </div>
+      </div>
+      <p class="pokedex__pokemon-description">{{ details.description }}</p>
+    </div>
+
+    <div class="pokedex__detail-column-right">
+      <div class="pokedex__detail-section">
+        <h3>Tipos</h3>
+        <div class="pokedex__types-container">
+          <span *ngFor="let typeInfo of details.types" class="pokedex__type-badge type-{{typeInfo.type.name}}">
+            {{ typeInfo.type.name }}
+          </span>
+        </div>
+      </div>
+
+      <div class="pokedex__detail-section">
+        <h3 class="pokedex__abilities-title">Habilidades</h3>
+        <ul class="pokedex__abilities-list">
+          <li *ngFor="let abilityInfo of details.abilities">
+            {{ abilityInfo.ability.name }}
+          </li>
+        </ul>
+      </div>
+
+      <div class="pokedex__detail-section">
+        <h3>Stats Base</h3>
+        <div class="pokedex__stats-container">
+          <div *ngFor="let stat of details.stats" class="pokedex__stat-item">
+            <span class="pokedex__stat-name">{{ stat.stat.name }}</span>
+            <span class="pokedex__stat-value">{{ stat.base_stat }}</span>
+            <div class="pokedex__stat-bar">
+              <div class="pokedex__stat-bar-fill" [style.width.%]="(stat.base_stat / 255) * 100"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pokedex__detail-section pokedex__detail-section--bottom-stats">
+        <div><strong>Altura:</strong> {{ details.height / 10 }} m</div>
+        <div><strong>Peso:</strong> {{ details.weight / 10 }} kg</div>
+      </div>
+    </div>
+
+  </div>
+</ion-content>

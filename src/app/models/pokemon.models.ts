@@ -15,7 +15,7 @@ export interface Pokemon {
 export interface PokemonSpecies {
   flavor_text_entries: {
     flavor_text: string;
-    language: { name: string; };
+    language: { name: string };
   }[];
 }
 

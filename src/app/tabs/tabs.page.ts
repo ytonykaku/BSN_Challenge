@@ -1,4 +1,11 @@
-import { Component, EnvironmentInjector, inject, OnDestroy, OnInit, HostBinding } from '@angular/core';
+import {
+  Component,
+  EnvironmentInjector,
+  inject,
+  OnDestroy,
+  OnInit,
+  HostBinding,
+} from '@angular/core';
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { triangle, ellipse, square } from 'ionicons/icons';
@@ -17,11 +24,11 @@ export class TabsPage implements OnInit, OnDestroy {
   private stateSubscription!: Subscription;
 
   constructor(private uiStateService: UiStateService) {
-    addIcons({ triangle, ellipse, square });}
+    addIcons({ triangle, ellipse, square });
+  }
 
-    ngOnInit() {
-    // A página de abas "ouve" as mudanças no serviço
-    this.stateSubscription = this.uiStateService.isPokedexOpen$.subscribe(isOpen => {
+  ngOnInit() {
+    this.stateSubscription = this.uiStateService.isPokedexOpen$.subscribe((isOpen) => {
       this.isPokedexOpen = isOpen;
     });
   }
@@ -31,4 +38,4 @@ export class TabsPage implements OnInit, OnDestroy {
       this.stateSubscription.unsubscribe();
     }
   }
-  }
+}
