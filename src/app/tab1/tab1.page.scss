@@ -439,9 +439,12 @@ $animation-speed: 0.5s;
       padding: 0;
       margin: 0;
 
+      -webkit-text-stroke: 3px black;
+      paint-order: stroke fill;
+
       li {
         text-transform: capitalize;
-        background: #eee;
+        background: #ffed4b;
         padding: 6px;
         border-radius: 5px;
         margin-bottom: 5px;
@@ -460,6 +463,7 @@ $animation-speed: 0.5s;
         gap: 5px;
         margin-bottom: 5px;
         font-size: 0.8em;
+        color: black;
 
         .pokedex__stat-name {
           text-transform: capitalize;
@@ -492,6 +496,7 @@ $animation-speed: 0.5s;
       width: 100%;
       padding-top: 15px;
       margin-top: 15px;
+      color: black;
     }
   }
 

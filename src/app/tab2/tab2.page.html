@@ -18,7 +18,7 @@
     <div class="pokedex__screen">
       <div class="pokedex__screen-content">
         <div class="pokedex__panels-container">
-          <div class="pokedex__panel-list">
+          <div class="pokedex__panel-list" [class.--full-width]="!isDesktop">
             <div class="pokedex__list-controls">
               <ion-searchbar placeholder="Buscar por nome ou nº" (ionInput)="onSearchChange($event)"></ion-searchbar>
               <ion-item>
@@ -56,7 +56,7 @@
             </div>
           </div>
 
-          <div class="pokedex__panel-detail">
+          <div class="pokedex__panel-detail" *ngIf="isDesktop">
             <div *ngIf="isDetailLoading" class="pokedex__detail-skeleton">
               <ion-spinner name="bubbles" color="primary"></ion-spinner>
               <p>Carregando dados...</p>
