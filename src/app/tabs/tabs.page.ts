@@ -9,7 +9,7 @@ import {
 import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { triangle, ellipse, square } from 'ionicons/icons';
-import { UiStateService } from '../services/ui-state.service'; // Importe o serviço
+import { UiStateService } from '../services/ui-state.service';
 import { Subscription } from 'rxjs';
 
 @Component({

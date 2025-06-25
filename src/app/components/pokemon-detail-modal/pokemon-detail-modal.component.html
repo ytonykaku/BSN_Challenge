@@ -2,11 +2,11 @@
   <ion-toolbar color="primary">
     <ion-title>#{{ details.id.toString().padStart(3, '0') }} - {{ details.name }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="toggleFavorite()">
+      <ion-button class="favorite-button" fill="clear" (click)="toggleFavorite()">
         <ion-icon 
           slot="icon-only" 
           [name]="isFavorite ? 'heart' : 'heart-outline'"
-          [color]="isFavorite ? 'danger' : 'light'">
+          [color]="isFavorite ? 'danger' : 'medium'">
         </ion-icon>
       </ion-button>
       <ion-button (click)="dismiss()">Fechar</ion-button>
