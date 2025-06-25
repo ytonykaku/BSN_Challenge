@@ -193,7 +193,7 @@ body .pokedex__panel-detail {
     position: absolute;
     top: 5px;
     right: 5px;
-    z-index: 100;
+    z-index: 1000000;
 
     ion-icon {
       font-size: 2em;

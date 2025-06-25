@@ -171,6 +171,7 @@ $animation-speed: 0.5s;
   width: 200px;
   height: 200px;
   z-index: 10;
+  pointer-events: none;
 
   &-svg {
     width: 100%;
@@ -504,7 +505,7 @@ $animation-speed: 0.5s;
     position: absolute;
     top: 5px;
     right: 5px;
-    z-index: 100;
+    z-index: 100000;
 
     ion-icon {
       font-size: 2em;
